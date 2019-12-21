@@ -1,0 +1,93 @@
+@echo off
+goto autoboot
+
+:autoboot
+title UraniumOS v1.0.0
+echo Loading UraniumOS v1.0.0
+goto Login-Script
+
+:Login-Script
+cls
+echo Welcome to UraniumOS
+set /p username="Your name> "
+echo Welcome to UraniumOS 1.0.0, %username%
+pause
+goto execmenu
+
+
+:execmenu
+cls
+set /p subapp="Type the subapp you want to use. To see a list of subapps, type submenu> "
+goto %subapp%
+echo Uh-Oh! This app does not exist!
+pause
+goto execmenu
+
+
+:submenu
+cls
+echo Welcome to submenu
+echo Here is your list:
+echo 1) shutdown-sub
+echo 2) cmd
+echo 3) BatchShell
+echo 4) SysInfo
+echo 5) ThirdPartyMang
+echo 6) tpm (same as 5)
+echo Follow the instructions below to return to execmenu
+pause
+goto execmenu
+
+::Apps:
+::They all run in batch
+
+:shutdown-sub
+cls
+set /p shutdown_subVAR1="Type the method of shutdown from "system" and "batch> "
+if "%shutdown_subVAR1%"=="batch" (
+  exit
+)
+
+:cmd
+goto cmd-command
+:cmd-command
+set /p cmd-entry="URANIUMOS COMMAND LINE> "
+%cmd-entry%
+goto cmd-command
+
+::cmd and cmd-command are related apps, they run together
+
+
+
+::Following, the BatchShell command line
+
+:BatchShell
+cls
+goto BatchShellCOMMAND
+:BatchShellCOMMAND
+set /p bs-entry="%~dp0> "
+
+goto BatchShellCOMMAND
+
+goto execmenu
+
+::End of BatchShell command line
+
+:SysInfo
+cls
+echo -About-
+echo (Empty)
+echo -Make your own apps-
+echo (Empty)
+echo -SysInfo-
+ver
+systeminfo
+pause
+goto execmenu
+
+:ThirdPartyMang
+echo ThirdPartyMang will take you to third party apps, no installation needed.
+set /p tpmapp="AppName> "
+start %AppName%
+:tpm
+goto ThirdPartyMang
